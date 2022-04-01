@@ -7,9 +7,6 @@ from django.utils.decorators import method_decorator
 @method_decorator(login_required(login_url="/users/u/" ), name="dispatch")
 class landing_page(View):
     def get(self , request):
-        print(request.user)
-        print("*****")
-        print("=======")
         data = Data.objects.filter(user = request.user)
         Category = Categories.objects.all()
         return render(request , "todolist/index.html" , {"todos": data , "categories" : Category })

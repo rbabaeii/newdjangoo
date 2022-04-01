@@ -10,7 +10,7 @@ class users(View):
 
     def post(self , request):
         if "signup" in request.POST:
-            if ("name" and "pass" and email in request.POST):
+            if ("name" and "pass" and 'email' in request.POST):
                 name = request.POST['name']
                 password = request.POST['pass']
                 email = request.POST['email']
@@ -24,18 +24,23 @@ class users(View):
             else:
                 return HttpResponse("full the fields")
         elif 'signin' in request.POST:
-            username = request.POST['username']
-            password = request.POST['pass']
-            u = authenticate(
-                request ,
-                username = username,
-                password = password,
-            )
-            if u:
-                login(request , u)
-                return redirect("/")
+            if( 'username' in request.POST and
+                "pass" in request.POST 
+            ):
+                username = request.POST['username']
+                password = request.POST['pass']
+                u = authenticate(
+                    request ,
+                    username = username,
+                    password = password,
+                )
+                if u:
+                    login(request , u)
+                    return redirect("/")
+                else:
+                    return HttpResponse("your name or password is wrong ")
             else:
-                return HttpResponse("your name or password is wrong ")
+                return HttpResponse("full the fields")
 
 class logoutt(View):
     def get(self , request):
