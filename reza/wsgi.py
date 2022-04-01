@@ -8,6 +8,13 @@ https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
 import os
+# from whitenoise import WhiteNoise
+
+# from reza import wsgi
+
+# application = wsgi()
+# application = WhiteNoise(application, root="/path/to/static/files")
+# application.add_files("/path/to/more/static/files", prefix="more-files/")
 
 from django.core.wsgi import get_wsgi_application
 
